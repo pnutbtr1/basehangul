@@ -105,13 +105,8 @@ int main(int argc, char *argv[])
                 buf[2] = (uint8_t) (hgbuf[1] << 4 | (0x3FF & hgbuf[2]) >> 6);
                 buf[3] = (uint8_t) (hgbuf[2] << 2 | (0x3FF & hgbuf[3]) >> 8);
                 buf[4] = (uint8_t) (hgbuf[3]);
+
                 numBytes = 5;
-                for (int i = 3; i > 0; i--)
-                    if (hgbuf[i] != PAD_CHAR) {
-                        if (i != 3)
-                            numBytes = i+1;
-                        break;
-                    }
                 if ((hgbuf[3] & 0x7FC) == 0x400) {
                     numBytes = 4;
                     buf[3] = (char) (hgbuf[2] << 2 | (0x3 & hgbuf[3]));
